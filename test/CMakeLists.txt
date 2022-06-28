@@ -9,10 +9,14 @@ add_executable(
 
 target_link_libraries(
   tests
-  object
   warrior
-  swordsman
+  object
+  objectFactory
+  sword
+  buckler
+  axe
   viking
+  swordsman
   gcov
   gtest_main
 )
