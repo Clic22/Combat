@@ -9,7 +9,10 @@ add_executable(
 
 target_link_libraries(
   tests
-  hello
+  object
+  warrior
+  swordsman
+  viking
   gcov
   gtest_main
 )
