@@ -3,7 +3,7 @@
 #include "Swordsman.h"
 #include "Viking.h"
 
-/*
+
 static void SwordsmanVsViking()
 {
     Swordsman swordsman;
@@ -27,7 +27,7 @@ static void SwordsmanWithBucklerVsVikingWithBuckler()
     std::cout << "VikingWithBuckler (70) = " << viking.HitPoints() << std::endl;
     std::cout << std::endl;
 }
- 
+/*
 static void ArmoredSwordsmanVsHighlander()
 {
     Highlander highlander;
@@ -57,10 +57,11 @@ static void ViciousSwordsmanVsVeteranHighlander()
  */
 int main(int ac, char** av)
 {
-    /*
+    
     SwordsmanVsViking();
     
     SwordsmanWithBucklerVsVikingWithBuckler();
+    /*
     ArmoredSwordsmanVsHighlander();
     ViciousSwordsmanVsVeteranHighlander();
     */

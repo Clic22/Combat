@@ -1,11 +1,14 @@
 #include "Warrior.h"
+#include "ObjectFactory.h"
+#include "Object.h"
+#include <iostream>
 
-Warrior::Warrior(int HitPoints, Object object){
+Warrior::Warrior(int HitPoints, const std::string& object){
     hitPoints_ = HitPoints;
     this->Equip(object);
 }
 
-int Warrior::HitPoints(){
+int Warrior::HitPoints() const {
     return hitPoints_;
 }
 
@@ -19,30 +22,32 @@ void Warrior::Engage(Warrior& opponent){
         this->fight(opponent);
         if (opponent.HitPoints()>0)
         {
-            opponent.fight((*this));
+            opponent.fight(*this);
         }
     }
 }
 
 void Warrior::fight(Warrior& opponent){
     int damage = 0;
-    for(Object object : inventory_){
-        damage += object.Damage();
+    for(std::shared_ptr<Object> object : inventory_){
+        damage += object->Attack(opponent);
     }
     opponent.ReceiveDamage(damage);
 }
 
 void Warrior::ReceiveDamage(int damage){
     this->HitPoints(this->HitPoints() - damage);
-    if ( this->HitPoints() < 0){
+    if (this->HitPoints() < 0){
         this->HitPoints(0);
     }      
 }
 
-void Warrior::Equip(Object object){
+void Warrior::Equip(const std::string& objectName){
+    ObjectFactory factory;
+    std::shared_ptr<Object> object = factory.createObject(objectName);
     inventory_.push_back(object);
 }
 
-std::vector<Object> Warrior::Inventory(){
+std::vector<std::shared_ptr<Object>> Warrior::Inventory() const {
     return inventory_;
 }

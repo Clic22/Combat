@@ -1,6 +1,7 @@
 #include "Warrior.h"
+#include "ObjectFactory.h"
 
 class Viking : public Warrior{
     public:
-        Viking() : Warrior(120,Object("axe",6)){};
+        Viking();
 };
