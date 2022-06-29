@@ -2,9 +2,9 @@
 #include <string>
 #include "Object.h"
 
-class Axe : public Object{
+class Armor : public Object{
     public:
-        Axe();
+        Armor();
         int Attack(Warrior& opponent, int penality) final;
         int Defense(std::shared_ptr<Object> weapon) final;
 };

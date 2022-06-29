@@ -29,8 +29,14 @@ void Warrior::Engage(Warrior& opponent){
 
 void Warrior::fight(Warrior& opponent){
     int damage = 0;
+    int penality = 0;
     for(std::shared_ptr<Object> object : inventory_){
-        damage += object->Attack(opponent);
+        if (object->Name() == "armor"){
+            penality = 1;
+        }     
+    }
+    for(std::shared_ptr<Object> object : inventory_){
+        damage += object->Attack(opponent, penality);
     }
     opponent.ReceiveDamage(damage);
 }

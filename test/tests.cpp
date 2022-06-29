@@ -2,6 +2,7 @@
 #include <gtest/gtest.h>
 #include "Swordsman.h"
 #include "Viking.h"
+#include "Highlander.h"
 #include "ObjectFactory.h"
 #include "Object.h"
 
@@ -39,8 +40,8 @@ TEST(AxeWeapon, Default) {
     std::shared_ptr<Object> axe = factory.createObject(objectName);
 
     Swordsman opponent;
-
-    ASSERT_EQ(6,axe->Attack(opponent));
+    int penality = 0;
+    ASSERT_EQ(6,axe->Attack(opponent,penality));
     ASSERT_EQ(0,axe->Defense(axe));
     ASSERT_EQ(6,axe->Damage());
 }
@@ -51,10 +52,42 @@ TEST(SwordWeapon, Default) {
     std::shared_ptr<Object> sword = factory.createObject(objectName);
 
     Swordsman opponent;
+    int penality = 0;
 
-    ASSERT_EQ(5,sword->Attack(opponent));
+    ASSERT_EQ(5,sword->Attack(opponent,penality));
     ASSERT_EQ(0,sword->Defense(sword));
     ASSERT_EQ(5,sword->Damage());
+}
+
+TEST(GreatSwordWeapon, Default) { 
+    std::string objectName = "greatSword";
+    ObjectFactory factory;
+    std::shared_ptr<Object> greatSword = factory.createObject(objectName);
+
+    Swordsman opponent;
+    int penality = 0;
+
+    ASSERT_EQ(12,greatSword->Attack(opponent,penality));
+    ASSERT_EQ(12,greatSword->Attack(opponent,penality));
+    ASSERT_EQ(0,greatSword->Attack(opponent,penality));
+    ASSERT_EQ(12,greatSword->Attack(opponent,penality));
+    ASSERT_EQ(0,greatSword->Defense(greatSword));
+    ASSERT_EQ(12,greatSword->Damage());
+}
+
+TEST(GreatSwordWeapon, Penality) { 
+    std::string objectName = "greatSword";
+    ObjectFactory factory;
+    std::shared_ptr<Object> greatSword = factory.createObject(objectName);
+
+    Swordsman opponent;
+    int penality = 1;
+
+    ASSERT_EQ(greatSword->Damage()-penality,greatSword->Attack(opponent,penality));
+    ASSERT_EQ(greatSword->Damage()-penality,greatSword->Attack(opponent,penality));
+    ASSERT_EQ(0,greatSword->Attack(opponent,penality));
+    ASSERT_EQ(greatSword->Damage()-penality,greatSword->Attack(opponent,penality));
+    ASSERT_EQ(0,greatSword->Defense(greatSword));
 }
 
 TEST(BucklerArmor, AgainstAxe) { 
@@ -91,6 +124,18 @@ TEST(BucklerArmor, AgainstSword) {
     ASSERT_EQ(sword->Damage(),buckler->Defense(sword));
 }
 
+TEST(Armor, Default) { 
+    ObjectFactory factory;
+    std::shared_ptr<Object> armor = factory.createObject("armor");
+    std::shared_ptr<Object> sword = factory.createObject("sword");
+
+    Swordsman opponent;
+
+    ASSERT_EQ(0,armor->Damage());
+    ASSERT_EQ(0,armor->Attack(opponent,0));
+    ASSERT_EQ(3,armor->Defense(sword));
+}
+
 TEST(SwordsmanInitialization, Default) { 
     auto swordsman = std::make_unique<Swordsman>();
     ASSERT_EQ(100, swordsman->HitPoints());
@@ -105,6 +150,14 @@ TEST(VikingInitialization, Default) {
     std::vector<std::shared_ptr<Object>> inventory =  viking->Inventory();
     ASSERT_EQ("axe", inventory.at(0)->Name());
     ASSERT_EQ(6, inventory.at(0)->Damage());
+}
+
+TEST(HighlanderInitialization, Default) { 
+    auto highlander = std::make_unique<Highlander>();
+    ASSERT_EQ(150, highlander->HitPoints());
+    std::vector<std::shared_ptr<Object>> inventory =  highlander->Inventory();
+    ASSERT_EQ("greatSword", inventory.at(0)->Name());
+    ASSERT_EQ(12, inventory.at(0)->Damage());
 }
 
 
@@ -125,6 +178,17 @@ TEST(SwordsmanWithBucklerVsVikingWithBuckler, Default) {
 
     ASSERT_EQ(0,swordsman.HitPoints());
     ASSERT_EQ(70,viking.HitPoints());
+}
+
+TEST(ArmoredSwordsmanVsHighlander, Default){
+    Highlander highlander;
+    Swordsman swordsman;
+    swordsman.Equip("buckler");
+    swordsman.Equip("armor");
+    swordsman.Engage(highlander);
+
+    ASSERT_EQ(0,swordsman.HitPoints());
+    ASSERT_EQ(10,highlander.HitPoints());
 }
 
 int main(int argc, char **argv) {

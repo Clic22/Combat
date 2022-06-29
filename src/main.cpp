@@ -2,6 +2,7 @@
 #include <memory>
 #include "Swordsman.h"
 #include "Viking.h"
+#include "Highlander.h"
 
 
 static void SwordsmanVsViking()
@@ -10,8 +11,8 @@ static void SwordsmanVsViking()
     Viking viking;
     swordsman.Engage(viking);
 
-    std::cout << "Swordsman (0) =" << swordsman.HitPoints() << std::endl;
-    std::cout << "Viking (35) =" << viking.HitPoints() << std::endl;
+    std::cout << "Swordsman (0) = " << swordsman.HitPoints() << std::endl;
+    std::cout << "Viking (35) = " << viking.HitPoints() << std::endl;
     std::cout << std::endl;
 }
 
@@ -27,7 +28,7 @@ static void SwordsmanWithBucklerVsVikingWithBuckler()
     std::cout << "VikingWithBuckler (70) = " << viking.HitPoints() << std::endl;
     std::cout << std::endl;
 }
-/*
+
 static void ArmoredSwordsmanVsHighlander()
 {
     Highlander highlander;
@@ -40,7 +41,7 @@ static void ArmoredSwordsmanVsHighlander()
     std::cout << "Highlander (10) = " << highlander.HitPoints() << std::endl;
     std::cout << std::endl;
 }
- 
+/*
 static void ViciousSwordsmanVsVeteranHighlander()
 {
     Swordsman swordsman("Vicious");
@@ -61,8 +62,9 @@ int main(int ac, char** av)
     SwordsmanVsViking();
     
     SwordsmanWithBucklerVsVikingWithBuckler();
-    /*
+    
     ArmoredSwordsmanVsHighlander();
+    /*
     ViciousSwordsmanVsVeteranHighlander();
     */
     return 0;
