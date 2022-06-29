@@ -6,8 +6,8 @@ constexpr int DAMAGE = 5;
 
 Sword::Sword() : Object("sword", DAMAGE){};
 
-int Sword::Attack(Warrior& opponent){
-    int damage = DAMAGE;
+int Sword::Attack(Warrior& opponent, int penality){
+    int damage = DAMAGE - penality;
 
     for(std::shared_ptr<Object> object : opponent.Inventory()){
         damage -= object->Defense(std::make_shared<Object>(*this));

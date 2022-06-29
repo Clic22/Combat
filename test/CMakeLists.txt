@@ -13,10 +13,13 @@ target_link_libraries(
   object
   objectFactory
   sword
+  greatSword
+  armor
   buckler
   axe
   viking
   swordsman
+  highlander
   gcov
   gtest_main
 )

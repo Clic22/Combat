@@ -8,7 +8,7 @@ class Object{
     public:
         Object(std::string name, int damage);
         virtual ~Object() = default;
-        virtual int Attack(Warrior& opponent){return 0;};
+        virtual int Attack(Warrior& opponent, int penality){return 0;};
         virtual int Defense(std::shared_ptr<Object> weapon){return 0;};
         std::string Name();
         int Damage();

@@ -9,11 +9,14 @@ target_link_libraries(
     warrior
     objectFactory 
     sword
+    greatSword
     object
+    armor
     buckler
     axe
     viking
-    swordsman 
+    swordsman
+    highlander
     -fprofile-arcs 
     --coverage
 )

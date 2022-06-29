@@ -2,6 +2,8 @@
 #include "Buckler.h"
 #include "Sword.h"
 #include "Axe.h"
+#include "Armor.h"
+#include "GreatSword.h"
 
 std::shared_ptr<Object> ObjectFactory::createObject(const std::string& object) const {
     if (object == "buckler")
@@ -15,6 +17,14 @@ std::shared_ptr<Object> ObjectFactory::createObject(const std::string& object) c
     else if (object == "sword")
     {
         return std::make_shared<Sword>();
+    }
+    else if (object == "greatSword")
+    {
+        return std::make_shared<GreatSword>();
+    }
+    else if (object == "armor")
+    {
+        return std::make_shared<Armor>();
     }
     else{
         return nullptr;
