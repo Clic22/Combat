@@ -1,19 +1,15 @@
 #include "Buckler.h"
 
 
-Buckler::Buckler() : Object("buckler",DAMAGE){};
+Buckler::Buckler() : Object("buckler",DAMAGE,OneHandedDefense){};
 
-int Buckler::Attack(Warrior& opponent, int penality){
-    return 0;
-}
-
-int Buckler::Defense(std::shared_ptr<Object> weapon){
+int Buckler::Defense(std::shared_ptr<Object> weapon, int damage){
     if (durability_ > 0 && block_){
         block_ = false;
         if (weapon->Name() == "axe"){
             durability_--;
         }
-        return weapon->Damage();
+        return damage;
     }
     else{
         block_ = true;

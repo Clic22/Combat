@@ -1,12 +1,27 @@
 #include "Warrior.h"
-#include "ObjectFactory.h"
 #include "Object.h"
-#include <iostream>
+#include "Trait.h"
+#include "ObjectFactory.h"
+#include "TraitFactory.h"
 
-Warrior::Warrior(int HitPoints, const std::string& object){
-    hitPoints_ = HitPoints;
+Warrior::Warrior(int MaxHealth, const std::string& object){
+    hitPoints_ = MaxHealth;
+    maxHealth_ = MaxHealth;
     this->Equip(object);
 }
+
+Warrior::Warrior(int MaxHealth, const std::string& object, const std::string& trait){
+    hitPoints_ = MaxHealth;
+    maxHealth_ = MaxHealth;
+    this->Equip(object);
+    TraitFactory factory;
+    trait_ = factory.createTrait(trait);
+}
+
+int Warrior::MaxHealth() const {
+    return maxHealth_;
+}
+
 
 int Warrior::HitPoints() const {
     return hitPoints_;
@@ -30,13 +45,16 @@ void Warrior::Engage(Warrior& opponent){
 void Warrior::fight(Warrior& opponent){
     int damage = 0;
     int penality = 0;
-    for(std::shared_ptr<Object> object : inventory_){
+    for(const auto& [type, object] : inventory_){
         if (object->Name() == "armor"){
             penality = 1;
         }     
     }
-    for(std::shared_ptr<Object> object : inventory_){
-        damage += object->Attack(opponent, penality);
+    for(const auto& [type, object] : inventory_){
+        if (object != nullptr)
+        {
+            damage += object->Attack(*this, opponent, penality);
+        }  
     }
     opponent.ReceiveDamage(damage);
 }
@@ -51,9 +69,22 @@ void Warrior::ReceiveDamage(int damage){
 void Warrior::Equip(const std::string& objectName){
     ObjectFactory factory;
     std::shared_ptr<Object> object = factory.createObject(objectName);
-    inventory_.push_back(object);
+    if (object->Type() == OneHandedWeapon || object->Type() == OneHandedDefense)
+    {
+        inventory_.erase(TwoHandedWeapon);
+    }
+    else if (object->Type() == TwoHandedWeapon)
+    {
+        inventory_.erase(OneHandedWeapon);
+        inventory_.erase(OneHandedDefense);
+    }
+    inventory_[object->Type()]=object;
 }
 
-std::vector<std::shared_ptr<Object>> Warrior::Inventory() const {
+std::unordered_map<type,std::shared_ptr<Object>> Warrior::Inventory() const {
     return inventory_;
+}
+
+std::shared_ptr<Trait> Warrior::GetTrait() const {
+    return trait_;
 }

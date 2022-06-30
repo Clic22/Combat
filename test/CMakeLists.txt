@@ -10,6 +10,10 @@ add_executable(
 target_link_libraries(
   tests
   warrior
+  traitFactory
+  veteran
+  vicious
+  trait
   object
   objectFactory
   sword
