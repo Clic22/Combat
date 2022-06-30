@@ -1,7 +1,7 @@
 #include "Warrior.h"
-#include "ObjectFactory.h"
 
 class Swordsman : public Warrior{
     public:
-        Swordsman();
+        Swordsman(): Warrior(100,"sword"){};
+        Swordsman(std::string trait): Warrior(100,"sword",trait){};
 };

@@ -41,7 +41,7 @@ static void ArmoredSwordsmanVsHighlander()
     std::cout << "Highlander (10) = " << highlander.HitPoints() << std::endl;
     std::cout << std::endl;
 }
-/*
+
 static void ViciousSwordsmanVsVeteranHighlander()
 {
     Swordsman swordsman("Vicious");
@@ -55,7 +55,7 @@ static void ViciousSwordsmanVsVeteranHighlander()
     std::cout << "VeteranHighlander (0) = " << highlander.HitPoints() << std::endl;
     std::cout << std::endl;
 }
- */
+
 int main(int ac, char** av)
 {
     
@@ -64,8 +64,8 @@ int main(int ac, char** av)
     SwordsmanWithBucklerVsVikingWithBuckler();
     
     ArmoredSwordsmanVsHighlander();
-    /*
+    
     ViciousSwordsmanVsVeteranHighlander();
-    */
+    
     return 0;
 }

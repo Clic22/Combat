@@ -1,8 +1,8 @@
 #include "ObjectFactory.h"
 #include "Buckler.h"
+#include "Armor.h"
 #include "Sword.h"
 #include "Axe.h"
-#include "Armor.h"
 #include "GreatSword.h"
 
 std::shared_ptr<Object> ObjectFactory::createObject(const std::string& object) const {

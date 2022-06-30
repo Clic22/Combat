@@ -8,8 +8,7 @@ constexpr int DAMAGE = 0;
 class Buckler : public Object{
     public:
         Buckler();
-        int Attack(Warrior& opponent, int penality) final;
-        int Defense(std::shared_ptr<Object> weapon) final;
+        int Defense(std::shared_ptr<Object> weapon, int damage) final;
     private:
         int durability_ = MAX_DURABILITY;
         bool block_ = true;
