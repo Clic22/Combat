@@ -20,7 +20,7 @@ class Warrior{
         void ReceiveDamage(int damage);
 
     private:
-        void fight(Warrior& opponent);
+        void fight(Warrior& opponent) const;
         int hitPoints_;
         int maxHealth_;
         std::unordered_map<ObjectType,std::shared_ptr<Object>> inventory_;

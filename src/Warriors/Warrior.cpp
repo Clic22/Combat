@@ -38,13 +38,11 @@ void Warrior::Engage(Warrior& opponent){
     }
 }
 
-void Warrior::fight(Warrior& opponent){
+void Warrior::fight(Warrior& opponent) const{
     int damage = 0;
     int penality = 0;
-    for(const auto& [type, object] : inventory_){
-        if (object->Name() == "armor"){
-            penality = 1;
-        }     
+    if (inventory_.count(ObjectType::BodyArmor)){
+        penality = 1;
     }
     for(const auto& [type, object] : inventory_){
         if (object != nullptr)
