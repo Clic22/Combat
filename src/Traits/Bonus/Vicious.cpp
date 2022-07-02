@@ -5,7 +5,7 @@
 
 Vicious::Vicious() : Trait("Vicious"){};
 
-int Vicious::BonusAttack(int damage, Warrior& attacker){
+int Vicious::BonusAttack(int damage,const Warrior& attacker){
     if (blows < maxBlow)
     {
         damage += bonusDamage;

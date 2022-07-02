@@ -4,9 +4,9 @@
 
 constexpr int weaponDamage = 12;
 
-GreatSword::GreatSword() : Object("greatSword", weaponDamage, TwoHandedWeapon){};
+GreatSword::GreatSword() : Object("greatSword", weaponDamage, ObjectType::TwoHandedWeapon){};
 
-int GreatSword::Attack(Warrior& attacker, Warrior& opponent, int penality){
+int GreatSword::Attack(const Warrior& attacker,const Warrior& opponent, int penality){
     if (attack_ < 2){
         attack_++;
         return this->BasicAttack(attacker,opponent,penality);

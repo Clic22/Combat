@@ -5,9 +5,9 @@
 
 constexpr int weaponDamage = 6;
 
-Axe::Axe() : Object("axe", weaponDamage,OneHandedWeapon){};
+Axe::Axe() : Object("axe", weaponDamage,ObjectType::OneHandedWeapon){};
 
-int Axe::Attack(Warrior& attacker, Warrior& opponent, int penality){
+int Axe::Attack(const Warrior& attacker,const Warrior& opponent, int penality){
     return this->BasicAttack(attacker,opponent,penality);
 
 }

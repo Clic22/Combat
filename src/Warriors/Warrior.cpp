@@ -4,15 +4,11 @@
 #include "ObjectFactory.h"
 #include "TraitFactory.h"
 
-Warrior::Warrior(int MaxHealth, const std::string& object){
-    hitPoints_ = MaxHealth;
-    maxHealth_ = MaxHealth;
+Warrior::Warrior(int MaxHealth, const std::string& object) : hitPoints_(MaxHealth), maxHealth_(MaxHealth){
     this->Equip(object);
 }
 
-Warrior::Warrior(int MaxHealth, const std::string& object, const std::string& trait){
-    hitPoints_ = MaxHealth;
-    maxHealth_ = MaxHealth;
+Warrior::Warrior(int MaxHealth, const std::string& object, const std::string& trait) : hitPoints_(MaxHealth), maxHealth_(MaxHealth){
     this->Equip(object);
     TraitFactory factory;
     trait_ = factory.createTrait(trait);
@@ -69,19 +65,19 @@ void Warrior::ReceiveDamage(int damage){
 void Warrior::Equip(const std::string& objectName){
     ObjectFactory factory;
     std::shared_ptr<Object> object = factory.createObject(objectName);
-    if (object->Type() == OneHandedWeapon || object->Type() == OneHandedDefense)
+    if (object->Type() == ObjectType::OneHandedWeapon || object->Type() == ObjectType::OneHandedDefense)
     {
-        inventory_.erase(TwoHandedWeapon);
+        inventory_.erase(ObjectType::TwoHandedWeapon);
     }
-    else if (object->Type() == TwoHandedWeapon)
+    else if (object->Type() == ObjectType::TwoHandedWeapon)
     {
-        inventory_.erase(OneHandedWeapon);
-        inventory_.erase(OneHandedDefense);
+        inventory_.erase(ObjectType::OneHandedWeapon);
+        inventory_.erase(ObjectType::OneHandedDefense);
     }
     inventory_[object->Type()]=object;
 }
 
-std::unordered_map<type,std::shared_ptr<Object>> Warrior::Inventory() const {
+std::unordered_map<ObjectType,std::shared_ptr<Object>> Warrior::Inventory() const {
     return inventory_;
 }
 

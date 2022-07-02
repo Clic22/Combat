@@ -5,5 +5,5 @@
 class Veteran : public Trait{
     public:
         Veteran();
-        int BonusAttack(int damage, Warrior& attacker) final;
+        int BonusAttack(int damage,const Warrior& attacker) final;
 };

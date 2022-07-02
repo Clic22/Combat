@@ -8,7 +8,7 @@ constexpr int bonusDamage = 20;
 class Vicious : public Trait{
     public:
         Vicious();
-        int BonusAttack(int damage, Warrior& opponent) final;
+        int BonusAttack(int damage,const Warrior& opponent) final;
     private: 
         int blows = 0;
 };

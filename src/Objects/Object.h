@@ -2,23 +2,23 @@
 #include <string>
 #include <memory>
 
-enum type { OneHandedWeapon, TwoHandedWeapon, OneHandedDefense, BodyArmor };
+enum class ObjectType { OneHandedWeapon, TwoHandedWeapon, OneHandedDefense, BodyArmor };
 
 class Warrior;
 
 class Object{
     public:
-        Object(std::string name, int damage, type type);
+        Object(const std::string& name, int damage, ObjectType type);
         virtual ~Object() = default;
-        virtual int Attack(Warrior& attacker, Warrior& opponent, int penality){return 0;};
+        virtual int Attack(const Warrior& attacker,const Warrior& opponent, int penality){return 0;};
         virtual int Defense(std::shared_ptr<Object> weapon, int damage){return 0;};
-        int BasicAttack(Warrior& attacker,Warrior& opponent, int penality);
-        std::string Name();
-        int Damage();
-        type Type();
+        int BasicAttack(const Warrior& attacker,const Warrior& opponent, int penality);
+        std::string Name() const;
+        int Damage() const;
+        ObjectType Type() const;
 
     private :
         std::string name_;
-        type type_;
         int damage_;
+        ObjectType type_;
 };
