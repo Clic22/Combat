@@ -15,7 +15,7 @@ class Warrior{
         int MaxHealth() const;
         void Engage(Warrior& opponent);
         void Equip(const std::string& object);
-        std::unordered_map<type,std::shared_ptr<Object>> Inventory() const;
+        std::unordered_map<ObjectType,std::shared_ptr<Object>> Inventory() const;
         std::shared_ptr<Trait> GetTrait() const;
         void ReceiveDamage(int damage);
 
@@ -23,6 +23,6 @@ class Warrior{
         void fight(Warrior& opponent);
         int hitPoints_;
         int maxHealth_;
-        std::unordered_map<type,std::shared_ptr<Object>> inventory_;
+        std::unordered_map<ObjectType,std::shared_ptr<Object>> inventory_;
         std::shared_ptr<Trait> trait_;
 };

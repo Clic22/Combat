@@ -1,7 +1,7 @@
 #include "Buckler.h"
 
 
-Buckler::Buckler() : Object("buckler",DAMAGE,OneHandedDefense){};
+Buckler::Buckler() : Object("buckler",DAMAGE,ObjectType::OneHandedDefense){};
 
 int Buckler::Defense(std::shared_ptr<Object> weapon, int damage){
     if (durability_ > 0 && block_){

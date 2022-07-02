@@ -2,6 +2,6 @@
 
 class Swordsman : public Warrior{
     public:
-        Swordsman(): Warrior(100,"sword"){};
-        Swordsman(std::string trait): Warrior(100,"sword",trait){};
+        Swordsman();
+        explicit Swordsman(const std::string& trait);
 };

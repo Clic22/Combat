@@ -2,25 +2,21 @@
 #include "Warrior.h"
 #include <iostream>
 
-Object::Object(std::string name, int damage, type type){
-    name_=name;
-    damage_=damage;
-    type_=type;
-}
+Object::Object(const std::string& name, int damage, ObjectType type) : name_(name), damage_(damage), type_(type){}
 
-std::string Object::Name(){
+std::string Object::Name() const{
     return name_;
 }
 
-int Object::Damage(){
+int Object::Damage() const{
     return damage_;
 }
 
-type Object::Type(){
+ObjectType Object::Type() const{
     return type_;
 }
 
-int  Object::BasicAttack(Warrior& attacker, Warrior& opponent, int penality){
+int  Object::BasicAttack(const Warrior& attacker,const Warrior& opponent, int penality){
     int damage = damage_;
     auto trait = attacker.GetTrait();
     if (trait != nullptr){

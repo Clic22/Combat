@@ -5,5 +5,5 @@
 class Sword : public Object{
     public:
         Sword();
-        int Attack(Warrior& attacker, Warrior& opponent, int penality) final;
+        int Attack(const Warrior& attacker,const Warrior& opponent, int penality) final;
 };

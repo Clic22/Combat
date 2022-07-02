@@ -6,10 +6,10 @@ class Warrior;
 
 class Trait{
     public:
-        Trait(std::string name);
+        explicit Trait(const std::string& name);
         virtual ~Trait() = default;
-        virtual int BonusAttack(int damage, Warrior& attacker){return damage;};
-        std::string Name();
+        virtual int BonusAttack(int damage,const Warrior& attacker){return damage;};
+        std::string Name() const;
 
     private :
         std::string name_;
